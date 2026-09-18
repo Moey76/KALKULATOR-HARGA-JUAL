@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Kalkulator harga jual gratis dan tanpa token untuk menghitung harga ideal, margin, biaya marketplace, dan ROAS." />
+    <meta name="theme-color" content="#10233f" />
+    <title>Kalkulator Harga Jual | Gratis & Tanpa Token</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Kalkulator Harga Jual">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>
+          <strong>Kalkulator Harga Jual</strong>
+          <small>Gratis • Tanpa token • Data tersimpan di perangkat</small>
+        </span>
+      </a>
+      <button class="ghost-button compact" id="resetTop" type="button">Mulai ulang</button>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero">
+        <div>
+          <span class="eyebrow">KALKULATOR SELLER INDONESIA</span>
+          <h1>Harga jual yang aman untuk <span>margin bisnis Anda.</span></h1>
+          <p>Hitung modal, biaya marketplace, promo, affiliate, iklan, laba bersih, dan ROAS dalam satu alur sederhana.</p>
+        </div>
+        <div class="hero-badge">
+          <span class="pulse"></span>
+          100% berjalan di browser
+        </div>
+      </section>
+
+      <section class="calculator-card">
+        <nav class="steps" aria-label="Langkah perhitungan">
+          <button class="step-tab active" type="button" data-step-target="1">
+            <span>1</span><div><small>Langkah 1</small><strong>Produk</strong></div>
+          </button>
+          <button class="step-tab" type="button" data-step-target="2">
+            <span>2</span><div><small>Langkah 2</small><strong>Target untung</strong></div>
+          </button>
+          <button class="step-tab" type="button" data-step-target="3">
+            <span>3</span><div><small>Langkah 3</small><strong>Promo & biaya</strong></div>
+          </button>
+          <button class="step-tab" type="button" data-step-target="4">
+            <span>4</span><div><small>Langkah 4</small><strong>Hasil</strong></div>
+          </button>
+        </nav>
+
+        <form id="calculatorForm" novalidate>
+          <section class="step-panel active" data-step="1">
+            <div class="section-heading">
+              <span>LANGKAH 1</span>
+              <h2>Kenali produk yang ingin dijual.</h2>
+              <p>Isi data dasarnya. Semua angka dapat diubah kapan saja.</p>
+            </div>
+
+            <div class="form-grid">
+              <label class="field span-2">
+                <span>Nama produk <b>*</b></span>
+                <input id="productName" type="text" placeholder="Contoh: Jeans Perfecto Loose Fit" autocomplete="off" required />
+                <small class="error-text">Nama produk perlu diisi.</small>
+              </label>
+
+              <label class="field">
+                <span>Platform penjualan</span>
+                <select id="platform">
+                  <option value="shopee">Shopee</option>
+                  <option value="tiktok">TikTok Shop</option>
+                  <option value="custom">Marketplace / Toko lainnya</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Modal / HPP produk <b>*</b></span>
+                <div class="money-input"><span>Rp</span><input id="cost" class="currency" inputmode="numeric" value="0" required /></div>
+                <small class="error-text">Modal harus lebih dari Rp0.</small>
+              </label>
+
+              <label class="field">
+                <span>Status toko</span>
+                <select id="sellerStatus">
+                  <option value="star">Star / Star+</option>
+                  <option value="non-star-under">Non-Star, pesanan ≤ 50</option>
+                  <option value="non-star-over">Non-Star, pesanan &gt; 50</option>
+                  <option value="custom">Lainnya</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Sistem produk</span>
+                <select id="preorder">
+                  <option value="no">Ready stock</option>
+                  <option value="yes">Pre-order</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="form-actions end">
+              <button class="primary-button next-button" type="button" data-next="2">Lanjut ke target untung <span>→</span></button>
+            </div>
+          </section>
+
+          <section class="step-panel" data-step="2">
+            <div class="section-heading">
+              <span>LANGKAH 2</span>
+              <h2>Tentukan untung yang ingin dicapai.</h2>
+              <p>Pilih cara paling nyaman untuk menetapkan target keuntungan.</p>
+            </div>
+
+            <div class="choice-cards" id="profitModeCards">
+              <label class="choice-card active">
+                <input type="radio" name="profitMode" value="nominal" checked />
+                <span class="choice-icon">Rp</span>
+                <strong>Nominal rupiah</strong>
+                <small>Target laba tetap per produk.</small>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="profitMode" value="markup" />
+                <span class="choice-icon">%</span>
+                <strong>Persen dari modal</strong>
+                <small>Contoh: laba 30% dari HPP.</small>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="profitMode" value="margin" />
+                <span class="choice-icon">◎</span>
+                <strong>Margin transaksi</strong>
+                <small>Laba dibanding harga transaksi.</small>
+              </label>
+            </div>
+
+            <label class="field target-field">
+              <span id="profitTargetLabel">Target untung per produk</span>
+              <div class="money-input" id="profitPrefix"><span>Rp</span><input id="profitTarget" class="currency" inputmode="numeric" value="50000" /></div>
+              <small id="profitHint">Contoh: modal Rp100.000 dan target Rp50.000 berarti laba bersih yang dicari Rp50.000.</small>
+              <small class="error-text">Target untung harus lebih dari 0.</small>
+            </label>
+
+            <div class="form-actions split">
+              <button class="ghost-button prev-button" type="button" data-prev="1">← Kembali</button>
+              <button class="primary-button next-button" type="button" data-next="3">Lanjut ke promo & biaya <span>→</span></button>
+            </div>
+          </section>
+
+          <section class="step-panel" data-step="3">
+            <div class="section-heading">
+              <span>LANGKAH 3</span>
+              <h2>Masukkan promo dan semua biaya.</h2>
+              <p>Gunakan angka dari Seller Centre Anda. Persentase program dapat berubah sewaktu-waktu.</p>
+            </div>
+
+            <div class="notice info">
+              <span>i</span>
+              <p><strong>Tip:</strong> isi 0 jika biaya tidak digunakan. Preset hanya titik awal dan bisa diedit penuh.</p>
+            </div>
+
+            <div class="cost-section">
+              <div class="cost-title"><span class="cost-icon">%</span><div><h3>Diskon & voucher toko</h3><p>Promo yang Anda tanggung sendiri.</p></div></div>
+              <div class="form-grid three">
+                <label class="field"><span>Diskon toko</span><div class="suffix-input"><input id="storeDiscount" class="decimal" inputmode="decimal" value="0" /><span>%</span></div></label>
+                <label class="field"><span>Voucher toko</span><div class="money-input"><span>Rp</span><input id="voucher" class="currency" inputmode="numeric" value="0" /></div></label>
+                <label class="field"><span>Cashback koin</span><div class="suffix-input"><input id="coinRate" class="decimal" inputmode="decimal" value="0" /><span>%</span></div></label>
+              </div>
+            </div>
+
+            <div class="cost-section">
+              <div class="cost-title"><span class="cost-icon">M</span><div><h3>Biaya marketplace</h3><p>Admin, layanan, dan program marketplace.</p></div></div>
+              <div class="form-grid three">
+                <label class="field"><span>Biaya admin & layanan</span><div class="suffix-input"><input id="adminRate" class="decimal" inputmode="decimal" value="8" /><span>%</span></div></label>
+                <label class="field"><span>Promo / Gratis Ongkir XTRA</span><div class="suffix-input"><input id="promoRate" class="decimal" inputmode="decimal" value="0" /><span>%</span></div></label>
+                <label class="field"><span>Live XTRA</span><div class="suffix-input"><input id="liveRate" class="decimal" inputmode="decimal" value="0" /><span>%</span></div></label>
+                <label class="field"><span>Biaya pre-order</span><div class="suffix-input"><input id="preorderRate" class="decimal" inputmode="decimal" value="0" /><span>%</span></div></label>
+                <label class="field"><span>Premi asuransi</span><div class="suffix-input"><input id="insuranceRate" class="decimal" inputmode="decimal" value="0" /><span>%</span></div></label>
+                <label class="field"><span>Biaya proses pesanan</span><div class="money-input"><span>Rp</span><input id="processFee" class="currency" inputmode="numeric" value="1250" /></div></label>
+              </div>
+            </div>
+
+            <div class="cost-section">
+              <div class="cost-title"><span class="cost-icon">A</span><div><h3>Marketing & operasional</h3><p>Affiliate, iklan, packing, dan operasional.</p></div></div>
+              <div class="form-grid three">
+                <label class="field"><span>Komisi affiliate</span><div class="suffix-input"><input id="affiliateRate" class="decimal" inputmode="decimal" value="0" /><span>%</span></div></label>
+                <label class="field"><span>Biaya iklan per produk</span><div class="money-input"><span>Rp</span><input id="adCost" class="currency" inputmode="numeric" value="0" /></div></label>
+                <label class="field"><span>Biaya packing</span><div class="money-input"><span>Rp</span><input id="packingCost" class="currency" inputmode="numeric" value="0" /></div></label>
+                <label class="field"><span>Biaya operasional</span><div class="money-input"><span>Rp</span><input id="operationalCost" class="currency" inputmode="numeric" value="0" /></div></label>
+              </div>
+            </div>
+
+            <div class="cost-section custom-section">
+              <div class="cost-title-row">
+                <div class="cost-title"><span class="cost-icon">+</span><div><h3>Biaya tambahan</h3><p>Tambahkan biaya lain sesuai kebutuhan.</p></div></div>
+                <button class="small-button" id="addCustomFee" type="button">+ Tambah biaya</button>
+              </div>
+              <div id="customFeeList"></div>
+              <p class="empty-state" id="customFeeEmpty">Belum ada biaya tambahan.</p>
+            </div>
+
+            <div class="form-actions split">
+              <button class="ghost-button prev-button" type="button" data-prev="2">← Kembali</button>
+              <button class="primary-button" id="calculateButton" type="button">Hitung harga jual <span>→</span></button>
+            </div>
+          </section>
+
+          <section class="step-panel result-panel" data-step="4">
+            <div class="result-header">
+              <div>
+                <span class="eyebrow">HASIL PERHITUNGAN</span>
+                <h2 id="resultProductName">Harga jual ideal</h2>
+                <p>Hasil berdasarkan seluruh angka yang Anda masukkan.</p>
+              </div>
+              <button class="ghost-button compact" id="editCalculation" type="button">Edit data</button>
+            </div>
+
+            <div class="hero-result">
+              <div>
+                <small>Rekomendasi harga jual</small>
+                <strong id="idealPrice">Rp0</strong>
+                <p id="roundingNote">Sudah dibulatkan ke atas agar mudah dipasang.</p>
+              </div>
+              <div class="result-health good" id="resultHealth">
+                <span>✓</span><div><small>Status margin</small><strong>Aman</strong></div>
+              </div>
+            </div>
+
+            <div class="metric-grid">
+              <article><small>Dana masuk</small><strong id="netPayout">Rp0</strong><span>setelah semua biaya</span></article>
+              <article><small>Untung bersih</small><strong id="netProfit">Rp0</strong><span>per produk</span></article>
+              <article><small>Margin bersih</small><strong id="netMargin">0%</strong><span>dari transaksi</span></article>
+              <article><small>Total biaya</small><strong id="totalFees">Rp0</strong><span>di luar modal</span></article>
+            </div>
+
+            <div class="result-grid">
+              <article class="result-card">
+                <div class="card-title"><div><span class="mini-icon">R</span><div><h3>Kontrol ROAS</h3><p>Batas aman performa iklan.</p></div></div></div>
+                <div class="roas-grid">
+                  <div><small>BEP ROAS</small><strong id="breakEvenRoas">—</strong><span>Batas sebelum rugi</span></div>
+                  <div><small>Target ROAS</small><strong id="targetRoas">—</strong><span>Agar target laba tercapai</span></div>
+                </div>
+              </article>
+
+              <article class="result-card">
+                <div class="card-title"><div><span class="mini-icon">S</span><div><h3>Simulasi harga lain</h3><p>Cek untung jika harga diubah.</p></div></div></div>
+                <label class="field"><span>Harga jual simulasi</span><div class="money-input"><span>Rp</span><input id="simulationPrice" class="currency" inputmode="numeric" value="0" /></div></label>
+                <div class="sim-result"><span>Estimasi untung</span><strong id="simulationProfit">Rp0</strong></div>
+              </article>
+            </div>
+
+            <article class="result-card breakdown-card">
+              <div class="card-title"><div><span class="mini-icon">≡</span><div><h3>Rincian perhitungan</h3><p>Lihat ke mana setiap rupiah dialokasikan.</p></div></div><button class="text-button" id="toggleBreakdown" type="button">Sembunyikan</button></div>
+              <div class="breakdown" id="breakdown"></div>
+            </article>
+
+            <article class="result-card strike-card">
+              <div class="card-title"><div><span class="mini-icon">%</span><div><h3>Simulasi harga coret</h3><p>Harga awal agar setelah diskon tetap sama dengan rekomendasi.</p></div></div></div>
+              <div class="strike-controls">
+                <label class="field"><span>Diskon custom</span><div class="suffix-input"><input id="strikeCustomRate" class="decimal" inputmode="decimal" value="10" /><span>%</span></div></label>
+              </div>
+              <div class="strike-grid" id="strikeGrid"></div>
+            </article>
+
+            <article class="insight-card">
+              <div class="insight-title"><span>✦</span><div><small>INSIGHT OTOMATIS OFFLINE</small><h3>Saran untuk harga Anda</h3></div></div>
+              <ul id="insightList"></ul>
+            </article>
+
+            <div class="result-actions">
+              <button class="ghost-button" id="saveHistory" type="button">Simpan ke riwayat</button>
+              <button class="ghost-button" id="exportCsv" type="button">Unduh CSV</button>
+              <button class="primary-button" id="newCalculation" type="button">Hitung produk lain</button>
+            </div>
+          </section>
+        </form>
+      </section>
+
+      <section class="history-section" id="historySection">
+        <div class="history-heading"><div><span class="eyebrow">TERSIMPAN DI PERANGKAT</span><h2>Riwayat kalkulasi</h2></div><button class="text-button danger" id="clearHistory" type="button">Hapus semua</button></div>
+        <div class="history-list" id="historyList"></div>
+        <p class="history-empty" id="historyEmpty">Belum ada hasil yang disimpan.</p>
+      </section>
+
+      <p class="disclaimer"><strong>Catatan:</strong> Aplikasi ini adalah alat bantu estimasi independen, bukan situs resmi marketplace. Selalu cocokkan persentase dan ketentuan terbaru dengan Seller Centre Anda.</p>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="calc-core.js" defer></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>
